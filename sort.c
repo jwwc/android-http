@@ -1,20 +1,36 @@
 #include<iostream>
+#include <algorithm>
 using namespace std;
-unsigned long long fib_dp(int n)
+void quick_sort(int a[],int begin,int end)
 {
-    if(n<2)
-    return n;
-    unsigned long long*value_table=new unsigned long long[n+1];
-    value_table[0]=0;
-    value_table[1]=1;
-    for(int i=2;i<=n;i++)
+    if(begin>=end)
+    return ;
+    int left=begin,right=end;
+    int mid_value=a[left];
+    while(left<right)
     {
-        value_table[i]=value_table[i-1]+value_table[i-2];
+        if(a[left+1]<mid_value){
+        a[left]=a[left+1];
+        left++;
     }
-    return value_table[n];
+    else{
+        swap(a[left+1],a[right]);
+        right--;
+    }
+    }
+    a[left]=mid_value;
+    quick_sort(a,begin,left-1);
+    quick_sort(a,left+1,end);
+    
 }
 int main()
 {
-        cout<<fib_dp(3)<<endl;
-
+    int array[]={2,4,5,2,7,4,8,1,4};
+    quick_sort(array,0,8);
+    for(int i=0;i<9;i++)
+    {
+        cout<<array[i];
+    }
+    
 }
+
